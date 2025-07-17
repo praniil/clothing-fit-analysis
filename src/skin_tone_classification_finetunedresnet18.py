@@ -3,11 +3,21 @@ import torch.nn as nn
 from torchvision import datasets, models, transforms
 from torch.utils.data import DataLoader
 from torchvision.models import ResNet18_Weights
+import os
 
+fine_tuned_model_path = "skin_tone_classifier_finetuned_resnet18_model.pth"
+
+if not os.path.exists(fine_tuned_model_path):
+    with open(fine_tuned_model_path, 'w') as file:
+        pass
+
+else:
+    print(f"the file {fine_tuned_model_path} already exists")
+ 
 #hyperparams
 batch_size = 16
 num_classes = 3
-num_epochs = 5
+num_epochs = 20
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 print(device)
@@ -59,5 +69,7 @@ for epoch in range(num_epochs):
     acc = 100. * correct / total
     print(f"Epoch {epoch+1}/{num_epochs} | Loss: {running_loss:.4f} | Accuracy: {acc:.2f}%")
 
+#saving the model
+torch.save(model.state_dict(), fine_tuned_model_path)
 
 
