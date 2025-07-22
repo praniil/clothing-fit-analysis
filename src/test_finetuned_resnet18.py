@@ -34,6 +34,7 @@ def predict_skin_tone(image_path):
 image_path_array = ["/home/pranil/workspace/python_projects/clothing_fit_analysis/dataset/raw_dataset/skin_tone_testset/gyale.jpeg", 
                     "/home/pranil/workspace/python_projects/clothing_fit_analysis/dataset/raw_dataset/skin_tone_testset/virat.jpg",
                     "/home/pranil/workspace/python_projects/clothing_fit_analysis/dataset/raw_dataset/skin_tone_testset/tenz.jpeg",
+                    "/home/pranil/workspace/python_projects/clothing_fit_analysis/dataset/raw_dataset/skin_tone_testset/whiteblack.jpg"
                     ]
 
 
