@@ -1,6 +1,7 @@
 import cv2
 import time
 import os
+import test_finetuned_resnet18 as test
 
 cap = cv2.VideoCapture(0)
 
@@ -12,15 +13,18 @@ eye_cascade = cv2.CascadeClassifier('../open_cv_models/haarcascade_eye.xml')
 
 screenshot_count = 0;
 
-folder_name = f"../opencv_screenshots/"
+folder_name = "../opencv_screenshots"
+os.makedirs(folder_name, exist_ok=True)
+
 dir = os.listdir(folder_name)
-if len(dir) != 0:
-    for item in dir:
-        item_path = os.path.join(folder_name, item)
-        if os.path.isfile(item_path):
-            os.remove(item_path)
+image_path_array = []
+
+for item in dir:
+    item_path = os.path.join(folder_name, item)
+    if os.path.isfile(item_path):
+        os.remove(item_path)
     
-    print(f"Content of {folder_name} cleared")
+print(f"Content of {folder_name} cleared")
 
 while 1:
     ret, frame = cap.read()
@@ -48,19 +52,22 @@ while 1:
     # Display an image in a window
     cv2.imshow('img', frame)
 
-    current_timestamp_time = time.time()
+    current_timestamp_time = time.time() * 1000
     
     if screenshot_count < 5 and len(faces) > 0:
         print(current_timestamp_time)
         cv2.imwrite(f"{folder_name}/{current_timestamp_time}.jpg", face_crop)
         screenshot_count+=1
-        print(screenshot_count)
-
+        image_path_array.append(f"{folder_name}/{current_timestamp_time}.jpg")
 
     # Wait for Esc key to stop
     k = cv2.waitKey(30) & 0xff
     if k == 27:
         break
+
+for i in range(len(image_path_array)):
+    result = test.predict_skin_tone(image_path_array[i])
+    print(f"Predicted Skin Tone for {image_path_array[i]} is: {result}")
 
 # Close the window
 cap.release()
