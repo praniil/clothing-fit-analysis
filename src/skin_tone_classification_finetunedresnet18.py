@@ -15,9 +15,9 @@ else:
     print(f"the file {fine_tuned_model_path} already exists")
  
 #hyperparams
-batch_size = 16
+batch_size = 32
 num_classes = 3
-num_epochs = 20
+num_epochs = 25
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 print(device)
