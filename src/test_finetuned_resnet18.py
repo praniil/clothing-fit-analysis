@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 from torchvision import transforms, models
 from PIL import Image
+import os
 
 num_classes = 3
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -30,13 +31,16 @@ def predict_skin_tone(image_path):
 
     return class_names[pred.item()]
 
+folder_name = "../opencv_screenshots"
+dir = os.listdir(folder_name)
+print(len(dir))
+print(dir[0])
 
-image_path_array = ["/home/pranil/workspace/python_projects/clothing_fit_analysis/dataset/raw_dataset/skin_tone_testset/gyale.jpeg", 
-                    "/home/pranil/workspace/python_projects/clothing_fit_analysis/dataset/raw_dataset/skin_tone_testset/virat.jpg",
-                    "/home/pranil/workspace/python_projects/clothing_fit_analysis/dataset/raw_dataset/skin_tone_testset/tenz.jpeg",
-                    "/home/pranil/workspace/python_projects/clothing_fit_analysis/dataset/raw_dataset/skin_tone_testset/whiteblack.jpg"
-                    ]
+image_path_array = []
+for i in dir:
+    image_path_array.append(f"{folder_name}/{i}")
 
+print(image_path_array)
 
 for i in range(len(image_path_array)):
     result = predict_skin_tone(image_path_array[i])
