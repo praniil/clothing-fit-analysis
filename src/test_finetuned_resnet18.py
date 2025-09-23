@@ -30,18 +30,3 @@ def predict_skin_tone(image_path):
         _, pred = torch.max(outputs, 1)
 
     return class_names[pred.item()]
-
-folder_name = "../opencv_screenshots"
-dir = os.listdir(folder_name)
-print(len(dir))
-print(dir[0])
-
-image_path_array = []
-for i in dir:
-    image_path_array.append(f"{folder_name}/{i}")
-
-print(image_path_array)
-
-for i in range(len(image_path_array)):
-    result = predict_skin_tone(image_path_array[i])
-    print(f"Predicted Skin Tone for {image_path_array[i]} is: {result}")
