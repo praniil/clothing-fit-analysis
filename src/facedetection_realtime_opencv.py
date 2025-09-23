@@ -1,5 +1,6 @@
 import cv2
 import time
+import os
 
 cap = cv2.VideoCapture(0)
 
@@ -10,6 +11,17 @@ face_cascade = cv2.CascadeClassifier('../open_cv_models/haarcascade_frontalface_
 eye_cascade = cv2.CascadeClassifier('../open_cv_models/haarcascade_eye.xml')
 
 screenshot_count = 0;
+
+folder_name = f"../opencv_screenshots/"
+dir = os.listdir(folder_name)
+if len(dir) != 0:
+    for item in dir:
+        item_path = os.path.join(folder_name, item)
+        if os.path.isfile(item_path):
+            os.remove(item_path)
+    
+    print(f"Content of {folder_name} cleared")
+
 while 1:
     ret, frame = cap.read()
 
@@ -27,17 +39,16 @@ while 1:
         face_crop = frame[y:y+h, x:x+w]
 
         # Detects eyes of different sizes in the input image
-        eyes = eye_cascade.detectMultiScale(roi_gray, minSize=(5, 5)) 
+        # eyes = eye_cascade.detectMultiScale(roi_gray, minSize=(5, 5)) 
 
-        #To draw a rectangle in eyes
-        for (ex,ey,ew,eh) in eyes:
-            cv2.rectangle(face_crop,(ex,ey),(ex+ew,ey+eh),(0,127,255),2)
+        # #To draw a rectangle in eyes
+        # for (ex,ey,ew,eh) in eyes:
+        #     cv2.rectangle(face_crop,(ex,ey),(ex+ew,ey+eh),(0,127,255),2)
         
-        # Display an image in a window
-        cv2.imshow('img',face_crop)
+    # Display an image in a window
+    cv2.imshow('img', frame)
 
     current_timestamp_time = time.time()
-    folder_name = f"../opencv_screenshots/"
     
     if screenshot_count < 5 and len(faces) > 0:
         print(current_timestamp_time)
