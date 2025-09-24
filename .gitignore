@@ -5,3 +5,6 @@ src/skin_tone_classifier_finetuned_resnet18_model.pth
 cudnn-local-repo-ubuntu2204-9.13.0_1.0-1_amd64.deb
 opencv_screenshots
 src/__pycache__
+src/facedetection/__pycache__
+src/skin_tone_classifier/__pycache__
+src/skin_tone_classifier/skin_tone_classifier_finetuned_resnet18_model.pth
