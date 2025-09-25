@@ -14,7 +14,6 @@ if not cap.isOpened():
 
 # load the opencv models
 face_cascade = cv2.CascadeClassifier('../../open_cv_models/haarcascade_frontalface_default.xml')
-# eye_cascade = cv2.CascadeClassifier('../../open_cv_models/haarcascade_eye.xml')
 
 # global count variables
 screenshot_count = 0;
@@ -51,15 +50,6 @@ while 1:
     for (x,y,w,h) in faces:
         # To draw a rectangle in a face 
         cv2.rectangle(frame,(x,y),(x+w,y+h),(255,255,0),2) 
-        roi_gray = gray_frame[y:y+h, x:x+w]
-        face_crop = frame[y:y+h, x:x+w]
-
-        # Detects eyes of different sizes in the input image
-        # eyes = eye_cascade.detectMultiScale(roi_gray, minSize=(5, 5)) 
-
-        #To draw a rectangle in eyes
-        # for (ex,ey,ew,eh) in eyes:
-            # cv2.rectangle(face_crop,(ex,ey),(ex+ew,ey+eh),(0,127,255),2)
         
     # Display an image in a window
     cv2.imshow('img', frame)
@@ -97,10 +87,6 @@ while 1:
     k = cv2.waitKey(30) & 0xff
     if k == 27:
         break
-
-# for i in range(len(image_path_array)):
-#     result = predict_skin_tone(image_path_array[i])
-#     print(f"Predicted Skin Tone for {image_path_array[i]} is: {result}")
 
 # Close the window
 cap.release()
