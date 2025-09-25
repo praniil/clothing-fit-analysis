@@ -58,7 +58,6 @@ while 1:
     current_timestamp_time = time.time() * 1000
     
     if screenshot_count < total_screenshot_need and len(faces) > 0:
-        print(current_timestamp_time)
         cv2.imwrite(f"{folder_name}/{current_timestamp_time}.jpg", face_crop)
         image_path_array.append(f"{folder_name}/{current_timestamp_time}.jpg")
         result = predict_skin_tone(image_path_array[-1])
