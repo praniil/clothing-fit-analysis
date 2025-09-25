@@ -49,7 +49,8 @@ while 1:
 
     for (x,y,w,h) in faces:
         # To draw a rectangle in a face 
-        cv2.rectangle(frame,(x,y),(x+w,y+h),(255,255,0),2) 
+        cv2.rectangle(frame,(x,y),(x+w,y+h),(255,255,0),2)
+        face_crop = frame[y:y+h, x:x+w]
         
     # Display an image in a window
     cv2.imshow('img', frame)
