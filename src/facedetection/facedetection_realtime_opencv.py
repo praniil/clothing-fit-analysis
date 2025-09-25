@@ -73,9 +73,9 @@ while 1:
             if brown > white and brown > black:
                 end_result = "Brown"
             elif white > brown and white > black:
-                end_result = "Black"
-            else:
                 end_result = "White"
+            else:
+                end_result = "Black"
 
             print(f"Brown: {brown}, Black: {black}, White: {white}")
 
